@@ -30,47 +30,69 @@ const steps = [
 
 const ProcessSection = () => {
   return (
-    <section id="process" className="section-padding bg-secondary">
-      <div className="container mx-auto">
+    <section id="process" className="section-padding bg-secondary relative overflow-hidden">
+      {/* Background pattern */}
+      <div className="absolute inset-0 opacity-[0.02]" style={{
+        backgroundImage: "radial-gradient(circle, hsl(0 0% 100%) 1px, transparent 1px)",
+        backgroundSize: "24px 24px"
+      }} />
+      
+      <div className="container mx-auto relative">
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.5 }}
-          className="text-center mb-16"
+          className="text-center mb-20"
         >
-          <span className="text-sm font-semibold text-primary uppercase tracking-wider">Our Process</span>
-          <h2 className="font-heading text-3xl md:text-5xl font-bold text-secondary-foreground mt-3">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">Our Process</span>
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-secondary-foreground mt-3">
             How We <span className="text-gradient">Work</span>
           </h2>
-          <p className="mt-4 max-w-xl mx-auto" style={{ color: "hsl(220 14% 70%)" }}>
+          <p className="mt-5 max-w-xl mx-auto text-base" style={{ color: "hsl(220 14% 70%)" }}>
             Simple, transparent process — from first meeting to final delivery.
           </p>
         </motion.div>
 
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+        <div className="max-w-5xl mx-auto relative">
+          {/* Vertical timeline line */}
+          <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-px bg-gradient-to-b from-primary/30 via-primary/10 to-transparent hidden md:block" />
+
           {steps.map((step, i) => (
             <motion.div
               key={step.step}
-              initial={{ opacity: 0, y: 40 }}
-              whileInView={{ opacity: 1, y: 0 }}
+              initial={{ opacity: 0, x: i % 2 === 0 ? -60 : 60 }}
+              whileInView={{ opacity: 1, x: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.4, delay: i * 0.15 }}
-              className="relative text-center"
+              transition={{ duration: 0.6, delay: i * 0.15 }}
+              className={`relative flex items-start gap-8 mb-16 last:mb-0 md:${i % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}
             >
-              <div className="relative mx-auto w-16 h-16 rounded-2xl bg-primary/10 flex items-center justify-center mb-5">
-                <step.icon size={28} className="text-primary" />
-                <span className="absolute -top-2 -right-2 w-7 h-7 rounded-full gradient-accent text-primary-foreground text-xs font-bold flex items-center justify-center">
-                  {step.step}
-                </span>
+              {/* Content card */}
+              <div className={`flex-1 ${i % 2 === 0 ? 'md:text-right md:pr-16' : 'md:text-left md:pl-16'}`}>
+                <motion.div
+                  whileHover={{ scale: 1.02 }}
+                  className="p-7 rounded-2xl border border-primary/10 bg-navy-light/30 backdrop-blur-sm inline-block text-left"
+                >
+                  <div className="flex items-center gap-3 mb-3">
+                    <div className="w-11 h-11 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
+                      <step.icon size={20} className="text-primary-foreground" />
+                    </div>
+                    <div>
+                      <span className="text-primary font-bold text-xs tracking-wider">STEP {step.step}</span>
+                      <h3 className="font-heading text-lg font-bold text-secondary-foreground">{step.title}</h3>
+                    </div>
+                  </div>
+                  <p className="text-sm leading-relaxed" style={{ color: "hsl(220 14% 65%)" }}>{step.description}</p>
+                </motion.div>
               </div>
-              <h3 className="font-heading text-base font-bold text-secondary-foreground mb-2">{step.title}</h3>
-              <p className="text-sm leading-relaxed" style={{ color: "hsl(220 14% 60%)" }}>{step.description}</p>
 
-              {/* Connector line for desktop */}
-              {i < steps.length - 1 && (
-                <div className="hidden lg:block absolute top-8 left-[60%] w-[80%] h-px bg-primary/20" />
-              )}
+              {/* Timeline dot */}
+              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full gradient-accent items-center justify-center text-primary-foreground font-bold text-sm shadow-lg z-10">
+                {step.step}
+              </div>
+
+              {/* Spacer for alternating layout */}
+              <div className="flex-1 hidden md:block" />
             </motion.div>
           ))}
         </div>
