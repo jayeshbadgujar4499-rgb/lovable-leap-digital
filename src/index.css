@@ -6,23 +6,23 @@
 
 @layer base {
   :root {
-    --background: 220 20% 97%;
-    --foreground: 222 47% 11%;
+    --background: 225 15% 6%;
+    --foreground: 210 40% 96%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222 47% 11%;
+    --card: 225 15% 10%;
+    --card-foreground: 210 40% 96%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222 47% 11%;
+    --popover: 225 15% 10%;
+    --popover-foreground: 210 40% 96%;
 
     --primary: 24 95% 53%;
     --primary-foreground: 0 0% 100%;
 
-    --secondary: 220 60% 15%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 225 15% 13%;
+    --secondary-foreground: 210 40% 96%;
 
-    --muted: 220 14% 90%;
-    --muted-foreground: 220 10% 40%;
+    --muted: 225 12% 16%;
+    --muted-foreground: 220 10% 55%;
 
     --accent: 24 100% 60%;
     --accent-foreground: 0 0% 100%;
@@ -30,57 +30,35 @@
     --destructive: 0 84% 60%;
     --destructive-foreground: 210 40% 98%;
 
-    --border: 220 13% 87%;
-    --input: 220 13% 87%;
+    --border: 225 12% 16%;
+    --input: 225 12% 16%;
     --ring: 24 95% 53%;
 
     --radius: 0.75rem;
 
-    --sidebar-background: 0 0% 98%;
-    --sidebar-foreground: 240 5.3% 26.1%;
-    --sidebar-primary: 240 5.9% 10%;
-    --sidebar-primary-foreground: 0 0% 98%;
-    --sidebar-accent: 240 4.8% 95.9%;
-    --sidebar-accent-foreground: 240 5.9% 10%;
-    --sidebar-border: 220 13% 91%;
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    --sidebar-background: 225 15% 8%;
+    --sidebar-foreground: 210 40% 96%;
+    --sidebar-primary: 24 95% 53%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 225 12% 14%;
+    --sidebar-accent-foreground: 210 40% 96%;
+    --sidebar-border: 225 12% 16%;
+    --sidebar-ring: 24 95% 53%;
 
     /* Custom tokens */
-    --navy: 222 47% 11%;
-    --navy-light: 220 40% 20%;
-    --navy-dark: 222 55% 7%;
+    --navy: 225 15% 6%;
+    --navy-light: 225 15% 12%;
+    --navy-dark: 225 18% 4%;
     --orange-glow: 24 100% 55%;
     --orange-warm: 30 100% 50%;
-    --surface-glass: 0 0% 100%;
-    --gradient-hero: linear-gradient(135deg, hsl(222 55% 7%) 0%, hsl(220 40% 20%) 50%, hsl(222 47% 11%) 100%);
+    --surface-glass: 225 15% 12%;
+    --gradient-hero: linear-gradient(135deg, hsl(225 18% 4%) 0%, hsl(225 15% 8%) 50%, hsl(225 15% 6%) 100%);
     --gradient-accent: linear-gradient(135deg, hsl(24 95% 53%) 0%, hsl(30 100% 50%) 100%);
-    --gradient-mesh: radial-gradient(at 40% 20%, hsl(24 95% 53% / 0.08) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(220 60% 15% / 0.15) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(24 100% 60% / 0.05) 0px, transparent 50%);
-    --shadow-card: 0 4px 30px -4px hsl(222 47% 11% / 0.08);
-    --shadow-card-hover: 0 8px 40px -4px hsl(24 95% 53% / 0.15);
+    --gradient-mesh: radial-gradient(at 40% 20%, hsl(24 95% 53% / 0.08) 0px, transparent 50%), radial-gradient(at 80% 0%, hsl(225 15% 13% / 0.15) 0px, transparent 50%), radial-gradient(at 0% 50%, hsl(24 100% 60% / 0.05) 0px, transparent 50%);
+    --shadow-card: 0 4px 30px -4px hsl(0 0% 0% / 0.3);
+    --shadow-card-hover: 0 8px 40px -4px hsl(24 95% 53% / 0.2);
     --shadow-glow: 0 0 40px hsl(24 95% 53% / 0.3);
-    --shadow-xl: 0 20px 60px -12px hsl(222 47% 11% / 0.15);
-  }
-
-  .dark {
-    --background: 222 47% 6%;
-    --foreground: 210 40% 98%;
-    --card: 222 47% 11%;
-    --card-foreground: 210 40% 98%;
-    --popover: 222 47% 11%;
-    --popover-foreground: 210 40% 98%;
-    --primary: 24 95% 53%;
-    --primary-foreground: 0 0% 100%;
-    --secondary: 217 33% 17%;
-    --secondary-foreground: 210 40% 98%;
-    --muted: 217 33% 17%;
-    --muted-foreground: 215 20% 65%;
-    --accent: 217 33% 17%;
-    --accent-foreground: 210 40% 98%;
-    --destructive: 0 63% 31%;
-    --destructive-foreground: 210 40% 98%;
-    --border: 217 33% 17%;
-    --input: 217 33% 17%;
-    --ring: 212 27% 84%;
+    --shadow-xl: 0 20px 60px -12px hsl(0 0% 0% / 0.4);
   }
 }
 
@@ -91,6 +69,7 @@
 
   body {
     @apply bg-background text-foreground font-body antialiased;
+    overflow-x: hidden;
   }
 
   h1, h2, h3, h4, h5, h6 {
@@ -108,7 +87,7 @@
   }
 
   .glass-card {
-    @apply bg-card/80 backdrop-blur-xl border border-border/50 rounded-2xl;
+    @apply bg-card/60 backdrop-blur-xl border border-border/50 rounded-2xl;
     box-shadow: var(--shadow-card);
   }
 
@@ -126,15 +105,83 @@
   }
 
   .section-padding {
-    @apply py-20 md:py-28 px-4 md:px-8;
+    @apply py-24 md:py-32 px-4 md:px-8;
   }
 
   .floating-shape {
     @apply absolute rounded-full opacity-20 blur-3xl;
     background: hsl(var(--primary));
   }
+
+  /* Grain overlay */
+  .grain-overlay {
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0.03;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
+  }
+
+  /* Scroll progress bar */
+  .scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 2px;
+    z-index: 100;
+    background: var(--gradient-accent);
+    transform-origin: left;
+  }
+
+  /* Glass border glow */
+  .border-glow {
+    position: relative;
+  }
+  .border-glow::after {
+    content: '';
+    position: absolute;
+    inset: -1px;
+    border-radius: inherit;
+    padding: 1px;
+    background: linear-gradient(135deg, hsl(24 95% 53% / 0.3), transparent 50%, hsl(24 95% 53% / 0.1));
+    -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+    -webkit-mask-composite: xor;
+    mask-composite: exclude;
+    pointer-events: none;
+  }
+
+  /* Premium button shine */
+  .btn-shine {
+    position: relative;
+    overflow: hidden;
+  }
+  .btn-shine::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(0 0% 100% / 0.15), transparent);
+    transition: left 0.5s;
+  }
+  .btn-shine:hover::before {
+    left: 100%;
+  }
 }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: auto; /* Lenis handles smooth scroll */
+}
+
+/* Lenis overrides */
+html.lenis, html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
 }
