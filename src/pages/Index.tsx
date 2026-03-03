@@ -9,10 +9,17 @@ import TestimonialsSection from "@/components/TestimonialsSection";
 import ContactSection from "@/components/ContactSection";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import ScrollProgress from "@/components/ScrollProgress";
+import GrainOverlay from "@/components/GrainOverlay";
+import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
 const Index = () => {
+  useSmoothScroll();
+
   return (
     <div className="min-h-screen bg-background">
+      <GrainOverlay />
+      <ScrollProgress />
       <Navbar />
       <HeroSection />
       <ServicesSection />

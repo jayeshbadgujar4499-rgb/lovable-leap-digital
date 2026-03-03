@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { Shield, IndianRupee, Zap, HeartHandshake, Clock, Headphones } from "lucide-react";
+import { useScrollReveal } from "@/hooks/useGsapScrollTrigger";
 
 const reasons = [
   { icon: IndianRupee, title: "Affordable Pricing", desc: "Quality websites at prices that small businesses can afford.", number: "01" },
@@ -11,21 +12,16 @@ const reasons = [
 ];
 
 const WhyChooseSection = () => {
+  const headingRef = useScrollReveal();
+
   return (
     <section className="section-padding relative overflow-hidden">
-      {/* Decorative elements */}
-      <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.03] blur-[100px]" style={{ background: "hsl(24 95% 53%)" }} />
+      <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(24 95% 53%)" }} />
 
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
-          {/* Left - Heading */}
-          <motion.div
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-          >
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4">Why Us</span>
+          <div ref={headingRef}>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">Why Us</span>
             <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Why Choose <br />
               <span className="text-gradient">VyaparTech?</span>
@@ -44,9 +40,8 @@ const WhyChooseSection = () => {
                 <div className="text-xs text-muted-foreground mt-1">Avg. Delivery</div>
               </div>
             </div>
-          </motion.div>
+          </div>
 
-          {/* Right - Cards */}
           <div className="grid sm:grid-cols-2 gap-4">
             {reasons.map((r, i) => (
               <motion.div
@@ -54,11 +49,11 @@ const WhyChooseSection = () => {
                 initial={{ opacity: 0, y: 30 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.4, delay: i * 0.08 }}
+                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
                 whileHover={{ scale: 1.03 }}
-                className="group relative p-6 rounded-2xl border border-border/50 bg-card/50 backdrop-blur-sm hover:border-primary/20 hover:shadow-lg transition-all duration-300"
+                className="group relative p-6 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm hover:border-primary/20 transition-all duration-300 border-glow"
               >
-                <span className="absolute top-4 right-4 font-heading text-3xl font-black text-muted/30 group-hover:text-primary/10 transition-colors">{r.number}</span>
+                <span className="absolute top-4 right-4 font-heading text-3xl font-black text-muted/20 group-hover:text-primary/10 transition-colors">{r.number}</span>
                 <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
                   <r.icon size={22} className="text-primary" />
                 </div>
