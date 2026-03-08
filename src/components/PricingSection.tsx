@@ -35,7 +35,7 @@ const PricingSection = () => {
 
   return (
     <section id="pricing" className="section-padding relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(24 95% 53%)" }} />
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(239 84% 67%)" }} />
 
       <div className="container mx-auto">
         <div ref={headingRef} className="text-center mb-20">
@@ -58,7 +58,7 @@ const PricingSection = () => {
               transition={{ duration: 0.6, delay: i * 0.12, ease: [0.23, 1, 0.32, 1] }}
               whileHover={{ y: -8, scale: 1.02 }}
               className={`relative rounded-3xl border-2 bg-card/40 backdrop-blur-sm p-8 transition-all duration-300 ${
-                plan.popular ? "border-primary md:-mt-4 md:mb-4 shadow-2xl glow-orange" : "border-border/30"
+                plan.popular ? "border-primary md:-mt-4 md:mb-4 shadow-2xl glow-primary" : "border-border/30"
               }`}
             >
               {plan.popular && (
@@ -93,7 +93,7 @@ const PricingSection = () => {
 
               <Button
                 asChild
-                className={`w-full font-semibold py-6 rounded-xl group btn-shine ${plan.popular ? "gradient-accent text-primary-foreground border-0 glow-orange" : "bg-muted/30 hover:bg-muted/50 border border-border/30"}`}
+                className={`w-full font-semibold py-6 rounded-xl group btn-shine ${plan.popular ? "gradient-accent text-primary-foreground border-0 glow-primary" : "bg-muted/30 hover:bg-muted/50 border border-border/30"}`}
                 variant={plan.popular ? "default" : "ghost"}
               >
                 <a href="#contact">

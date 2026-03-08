@@ -28,19 +28,18 @@ const CountUp = ({ target, suffix = "" }: { target: number; suffix: string }) =>
 const HeroSection = () => {
   return (
     <section id="home" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-background">
-      {/* 3D Canvas Background */}
       <Suspense fallback={null}>
         <HeroScene />
       </Suspense>
 
       {/* Radial gradient overlays */}
       <div className="absolute inset-0 z-[1]" style={{
-        background: "radial-gradient(ellipse at 50% 50%, transparent 30%, hsl(225 15% 6%) 80%)"
+        background: "radial-gradient(ellipse at 50% 50%, transparent 30%, hsl(222 47% 11%) 80%)"
       }} />
 
       {/* Dot grid */}
       <div className="absolute inset-0 z-[1] opacity-[0.03]" style={{
-        backgroundImage: "radial-gradient(circle, hsl(210 40% 96%) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, hsl(210 40% 98%) 1px, transparent 1px)",
         backgroundSize: "40px 40px"
       }} />
 
@@ -54,10 +53,10 @@ const HeroSection = () => {
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8"
           >
             <span className="relative flex h-2 w-2">
-              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75" />
-              <span className="relative inline-flex rounded-full h-2 w-2 bg-primary" />
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75" />
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary" />
             </span>
-            <span className="text-xs font-semibold text-primary tracking-wide">Pune's Trusted Digital Partner</span>
+            <span className="text-xs font-semibold text-secondary tracking-wide">Pune's Trusted Digital Partner</span>
           </motion.div>
 
           {/* Heading */}
@@ -93,7 +92,7 @@ const HeroSection = () => {
             <Button
               asChild
               size="lg"
-              className="gradient-accent border-0 text-primary-foreground font-semibold text-base px-10 py-7 glow-orange hover:scale-105 transition-transform duration-300 rounded-2xl btn-shine"
+              className="gradient-accent border-0 text-primary-foreground font-semibold text-base px-10 py-7 glow-primary hover:scale-105 transition-transform duration-300 rounded-2xl btn-shine"
             >
               <a href="#contact">
                 Get Free Consultation
@@ -148,7 +147,7 @@ const HeroSection = () => {
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-40 z-[2]" style={{
-        background: "linear-gradient(to top, hsl(225 15% 6%), transparent)"
+        background: "linear-gradient(to top, hsl(222 47% 11%), transparent)"
       }} />
     </section>
   );

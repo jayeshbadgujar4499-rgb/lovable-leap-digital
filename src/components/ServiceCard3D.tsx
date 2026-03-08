@@ -31,7 +31,7 @@ const ServiceCard3D = ({ icon: Icon, title, description, index }: ServiceCard3DP
       {/* Border glow effect */}
       <div className="absolute inset-0 rounded-2xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none"
         style={{
-          background: "linear-gradient(135deg, hsl(24 95% 53% / 0.1), transparent 50%, hsl(24 95% 53% / 0.05))",
+          background: "linear-gradient(135deg, hsl(239 84% 67% / 0.1), transparent 50%, hsl(187 94% 43% / 0.08))",
         }}
       />
 
@@ -45,7 +45,7 @@ const ServiceCard3D = ({ icon: Icon, title, description, index }: ServiceCard3DP
           </div>
           <ArrowUpRight
             size={20}
-            className="text-muted-foreground/30 group-hover:text-primary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
+            className="text-muted-foreground/30 group-hover:text-secondary group-hover:translate-x-1 group-hover:-translate-y-1 transition-all duration-300"
             style={{ transform: "translateZ(40px)" }}
           />
         </div>

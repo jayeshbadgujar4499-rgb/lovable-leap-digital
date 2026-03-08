@@ -12,13 +12,13 @@ const Footer = () => {
   const y = useTransform(scrollYProgress, [0, 0.5], [40, 0]);
 
   return (
-    <footer ref={footerRef} className="bg-card/50 relative overflow-hidden border-t border-border/30">
+    <footer ref={footerRef} className="relative overflow-hidden border-t border-border/30" style={{ background: "hsl(222 47% 6%)" }}>
       {/* Animated gradient top border */}
       <div className="h-px w-full gradient-accent opacity-40" />
 
       {/* Grid overlay */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "linear-gradient(hsl(210 40% 96%) 1px, transparent 1px), linear-gradient(90deg, hsl(210 40% 96%) 1px, transparent 1px)",
+        backgroundImage: "linear-gradient(hsl(210 40% 98%) 1px, transparent 1px), linear-gradient(90deg, hsl(210 40% 98%) 1px, transparent 1px)",
         backgroundSize: "40px 40px"
       }} />
 
@@ -78,10 +78,9 @@ const Footer = () => {
 
         <div className="flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-1 text-xs text-muted-foreground">
-            © {new Date().getFullYear()} VyaparTech. Made with <Heart size={12} className="text-primary fill-primary mx-1" /> in Pune
+            © {new Date().getFullYear()} VyaparTech. Made with <Heart size={12} className="text-destructive fill-destructive mx-1" /> in Pune
           </div>
 
-          {/* Back to top with progress */}
           <motion.a
             href="#home"
             whileHover={{ y: -3, scale: 1.05 }}

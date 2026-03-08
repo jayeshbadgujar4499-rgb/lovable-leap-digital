@@ -25,10 +25,10 @@ const ContactSection = () => {
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
       <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "radial-gradient(circle, hsl(24 95% 53%) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, hsl(239 84% 67%) 1px, transparent 1px)",
         backgroundSize: "48px 48px"
       }} />
-      <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-[0.05] blur-[100px]" style={{ background: "hsl(24 95% 53%)" }} />
+      <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-[0.05] blur-[100px]" style={{ background: "hsl(239 84% 67%)" }} />
 
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-16">
@@ -77,7 +77,7 @@ const ContactSection = () => {
             <Button
               type="submit"
               disabled={loading}
-              className="w-full gradient-accent text-primary-foreground border-0 font-semibold py-7 rounded-xl glow-orange hover:scale-[1.02] transition-transform group btn-shine"
+              className="w-full gradient-amber text-accent-foreground border-0 font-semibold py-7 rounded-xl glow-amber hover:scale-[1.02] transition-transform group btn-shine"
             >
               {loading ? "Sending..." : "Send Message"}
               <Send size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
@@ -119,7 +119,7 @@ const ContactSection = () => {
               ))}
             </div>
 
-            <div className="p-5 rounded-2xl border border-primary/20 bg-primary/5 border-glow">
+            <div className="p-5 rounded-2xl border border-secondary/20 bg-secondary/5 border-glow">
               <div className="flex items-center gap-3">
                 <div className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center shadow-lg">
                   <ArrowRight size={18} className="text-primary-foreground" />
