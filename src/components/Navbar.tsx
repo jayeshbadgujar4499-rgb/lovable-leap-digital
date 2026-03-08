@@ -34,33 +34,31 @@ const Navbar = () => {
   const closeMenu = useCallback(() => setIsOpen(false), []);
 
   return (
-    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-700 ${
-      scrolled
-        ? "bg-background/70 backdrop-blur-2xl border-b border-border/30 shadow-2xl"
-        : "bg-transparent backdrop-blur-none"
+    <nav className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
+      scrolled ? "bg-background/85 backdrop-blur-2xl border-b border-border/40 shadow-lg" : "bg-background/30 backdrop-blur-md"
     }`}>
-      <div className="container mx-auto flex items-center justify-between h-[72px] px-4">
-        <a href="#home" className="flex items-center gap-2.5 group">
-          <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center shadow-lg group-hover:shadow-primary/40 transition-all duration-300 group-hover:scale-105">
+      <div className="container mx-auto flex items-center justify-between h-16 px-4">
+        <a href="#home" className="flex items-center gap-2 group">
+          <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center shadow-lg group-hover:shadow-primary/30 transition-shadow">
             <span className="font-heading font-bold text-primary-foreground text-sm">V</span>
           </div>
-          <span className="font-heading font-bold text-xl text-foreground tracking-tight">
+          <span className="font-heading font-bold text-xl text-foreground">
             Vyapar<span className="text-gradient">Tech</span>
           </span>
         </a>
 
-        <div className="hidden md:flex items-center gap-8">
+        <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
-              className="relative text-[13px] font-medium text-muted-foreground/80 hover:text-foreground transition-colors duration-300 py-1 group"
+              className="relative text-sm font-medium text-muted-foreground hover:text-foreground transition-colors duration-300 py-1 group"
             >
               {link.label}
-              <span className="absolute -bottom-0.5 left-1/2 -translate-x-1/2 w-0 h-[2px] rounded-full gradient-accent group-hover:w-full transition-all duration-500 ease-out" />
+              <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-px bg-primary group-hover:w-full transition-all duration-500 ease-out" />
             </a>
           ))}
-          <Button asChild className="gradient-accent border-0 text-primary-foreground font-semibold glow-primary btn-shine rounded-xl px-7 shadow-lg">
+          <Button asChild className="gradient-accent border-0 text-primary-foreground font-semibold glow-primary btn-shine rounded-xl px-6">
             <a href="#contact">Get Free Quote</a>
           </Button>
         </div>
@@ -74,25 +72,24 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
+      {/* Mobile Menu - CSS transition instead of framer-motion */}
       <div
-        className={`md:hidden backdrop-blur-2xl border-b border-border/30 overflow-hidden transition-all duration-300 ${
+        className={`md:hidden bg-background/95 backdrop-blur-2xl border-b border-border overflow-hidden transition-all duration-300 ${
           isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
         }`}
-        style={{ background: "hsl(222 47% 9% / 0.95)" }}
       >
-        <div className="flex flex-col gap-1 p-5">
+        <div className="flex flex-col gap-1 p-4">
           {navLinks.map((link) => (
             <a
               key={link.href}
               href={link.href}
               onClick={closeMenu}
-              className="py-3 px-4 text-sm font-medium text-muted-foreground hover:text-foreground rounded-xl hover:bg-muted/20 transition-colors"
+              className="py-3 px-4 text-sm font-medium text-muted-foreground hover:text-foreground rounded-xl hover:bg-muted/30 transition-colors"
             >
               {link.label}
             </a>
           ))}
-          <Button asChild className="mt-4 gradient-accent border-0 text-primary-foreground font-semibold rounded-xl">
+          <Button asChild className="mt-3 gradient-accent border-0 text-primary-foreground font-semibold">
             <a href="#contact" onClick={closeMenu}>Get Free Quote</a>
           </Button>
         </div>

@@ -16,22 +16,20 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="section-padding relative overflow-hidden">
-      {/* Premium ambient lights */}
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[150px]" style={{ background: "hsl(239 84% 67%)" }} />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full opacity-[0.03] blur-[100px]" style={{ background: "hsl(187 94% 43%)" }} />
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(239 84% 67%)" }} />
+      <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-[0.03] blur-[80px]" style={{ background: "hsl(187 94% 43%)" }} />
 
       <div className="container mx-auto relative">
         <div ref={sectionRef}>
           <div className="text-center mb-20">
-            <span className="premium-badge mb-5">
-              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-pulse" />
+            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">
               What We Offer
             </span>
-            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4">
+            <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-3">
               Services That <br className="hidden md:block" />
               <span className="text-gradient">Grow Your Business</span>
             </h2>
-            <p className="text-muted-foreground mt-6 max-w-xl mx-auto text-base font-light leading-relaxed">
+            <p className="text-muted-foreground mt-5 max-w-xl mx-auto text-base">
               Everything your small business needs to dominate the digital world — all under one roof.
             </p>
           </div>
