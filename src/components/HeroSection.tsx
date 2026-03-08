@@ -1,4 +1,3 @@
-import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useEffect, useState, lazy, Suspense, memo } from "react";
@@ -42,48 +41,39 @@ const HeroSection = () => {
       <div className="container mx-auto px-4 relative z-10 pt-20">
         <div className="max-w-4xl mx-auto text-center">
           {/* Badge */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8"
+          <div
+            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8 animate-fade-in"
           >
             <span className="relative flex h-2 w-2">
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-secondary opacity-75" />
               <span className="relative inline-flex rounded-full h-2 w-2 bg-secondary" />
             </span>
             <span className="text-xs font-semibold text-secondary tracking-wide">Pune's Trusted Digital Partner</span>
-          </motion.div>
+          </div>
 
           {/* Heading */}
-          <motion.h1
-            initial={{ opacity: 0, y: 40 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-            className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-7"
+          <h1
+            className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-7 animate-fade-in"
+            style={{ animationDelay: "0.1s", animationFillMode: "both" }}
           >
             <span className="text-foreground block">We Build</span>
             <span className="text-gradient block my-2">Powerful Websites</span>
             <span className="text-muted-foreground block text-[0.55em]">for Local Businesses</span>
-          </motion.h1>
+          </h1>
 
           {/* Subtext */}
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.5 }}
-            className="text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed text-muted-foreground"
+          <p
+            className="text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed text-muted-foreground animate-fade-in"
+            style={{ animationDelay: "0.3s", animationFillMode: "both" }}
           >
             Helping small shops, restaurants, salons & local businesses in Pune get more customers
             with stunning websites and digital solutions.
-          </motion.p>
+          </p>
 
           {/* CTAs */}
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.6 }}
-            className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          <div
+            className="flex flex-col sm:flex-row items-center justify-center gap-4 animate-fade-in"
+            style={{ animationDelay: "0.4s", animationFillMode: "both" }}
           >
             <Button
               asChild
@@ -103,14 +93,12 @@ const HeroSection = () => {
             >
               <a href="#portfolio">View Our Work</a>
             </Button>
-          </motion.div>
+          </div>
 
           {/* Stats */}
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.8 }}
-            className="flex items-center justify-center gap-4 md:gap-8 mt-20"
+          <div
+            className="flex items-center justify-center gap-4 md:gap-8 mt-20 animate-fade-in"
+            style={{ animationDelay: "0.6s", animationFillMode: "both" }}
           >
             {[
               { value: 50, suffix: "+", label: "Projects Done" },
@@ -127,18 +115,14 @@ const HeroSection = () => {
                 <div className="text-[10px] md:text-xs mt-1 font-medium text-muted-foreground">{stat.label}</div>
               </div>
             ))}
-          </motion.div>
+          </div>
         </div>
       </div>
 
-      {/* Scroll indicator */}
-      <motion.div
-        className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10"
-        animate={{ y: [0, 8, 0] }}
-        transition={{ duration: 2, repeat: Infinity }}
-      >
+      {/* Scroll indicator - CSS animation instead of framer-motion */}
+      <div className="absolute bottom-8 left-1/2 -translate-x-1/2 z-10 animate-bounce">
         <ChevronDown size={24} className="text-muted-foreground" />
-      </motion.div>
+      </div>
 
       {/* Bottom fade */}
       <div className="absolute bottom-0 left-0 right-0 h-40 z-[2]" style={{

@@ -1,11 +1,34 @@
-import { useState } from "react";
-import { motion } from "framer-motion";
+import { useState, useRef, useEffect } from "react";
 import { Send, Phone, Mail, MapPin, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useToast } from "@/hooks/use-toast";
-import { useScrollReveal } from "@/hooks/useGsapScrollTrigger";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const FadeIn = ({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(24px)";
+    el.style.transition = `opacity 0.6s ease-out ${delay}s, transform 0.6s ease-out ${delay}s`;
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [delay]);
+  return <div ref={ref}>{children}</div>;
+};
 
 const ContactSection = () => {
   const { toast } = useToast();
@@ -36,94 +59,88 @@ const ContactSection = () => {
         </div>
 
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
-          <motion.form
-            onSubmit={handleSubmit}
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6 }}
-            className="glass-card p-8 md:p-10 space-y-5 border-glow"
-          >
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-2 block">Your Name</label>
-                <Input placeholder="Jayesh Patil" required className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-2 block">Business Name</label>
-                <Input placeholder="My Bakery Shop" required className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
-              </div>
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4">
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-2 block">Phone Number</label>
-                <Input placeholder="+91 99700 62565" required className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
-              </div>
-              <div>
-                <label className="text-sm font-semibold text-foreground mb-2 block">Budget Range</label>
-                <Input placeholder="₹10,000 - ₹25,000" className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
-              </div>
-            </div>
-            <div>
-              <label className="text-sm font-semibold text-foreground mb-2 block">Tell Us Your Requirement</label>
-              <Textarea placeholder="I want a website for my restaurant with online menu and table booking..." rows={4} required className="bg-muted/30 border-border/30 rounded-xl focus:border-primary/50" />
-            </div>
-            <Button
-              type="submit"
-              disabled={loading}
-              className="w-full gradient-amber text-accent-foreground border-0 font-semibold py-7 rounded-xl glow-amber hover:scale-[1.02] transition-transform group btn-shine"
+          <FadeIn>
+            <form
+              onSubmit={handleSubmit}
+              className="glass-card p-8 md:p-10 space-y-5 border-glow"
             >
-              {loading ? "Sending..." : "Send Message"}
-              <Send size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
-            </Button>
-          </motion.form>
-
-          <motion.div
-            initial={{ opacity: 0, y: 30 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.6, delay: 0.1 }}
-            className="flex flex-col justify-center space-y-8"
-          >
-            <div>
-              <h3 className="font-heading text-2xl font-bold text-foreground mb-3">Ready to grow your business?</h3>
-              <p className="text-muted-foreground text-sm leading-relaxed">
-                We believe every small business deserves a strong online presence. Let's make it happen together —
-                no matter your budget or tech knowledge.
-              </p>
-            </div>
-
-            <div className="space-y-4">
-              {[
-                { icon: Phone, label: "+91 99700 62565", href: "tel:+919970062565" },
-                { icon: Mail, label: "hello@vyapartech.in", href: "mailto:hello@vyapartech.in" },
-                { icon: MapPin, label: "Pune, Maharashtra, India", href: "#" },
-              ].map((item) => (
-                <a
-                  key={item.label}
-                  href={item.href}
-                  className="flex items-center gap-4 text-sm text-muted-foreground hover:text-primary transition-colors p-3 rounded-xl hover:bg-muted/20"
-                >
-                  <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20">
-                    <item.icon size={20} className="text-primary" />
-                  </div>
-                  <span className="font-medium">{item.label}</span>
-                </a>
-              ))}
-            </div>
-
-            <div className="p-5 rounded-2xl border border-secondary/20 bg-secondary/5 border-glow">
-              <div className="flex items-center gap-3">
-                <div className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center shadow-lg">
-                  <ArrowRight size={18} className="text-primary-foreground" />
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-foreground mb-2 block">Your Name</label>
+                  <Input placeholder="Jayesh Patil" required className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
                 </div>
                 <div>
-                  <div className="font-heading font-bold text-foreground text-sm">Free Consultation</div>
-                  <div className="text-xs text-muted-foreground">Get expert advice at zero cost</div>
+                  <label className="text-sm font-semibold text-foreground mb-2 block">Business Name</label>
+                  <Input placeholder="My Bakery Shop" required className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
+                </div>
+              </div>
+              <div className="grid sm:grid-cols-2 gap-4">
+                <div>
+                  <label className="text-sm font-semibold text-foreground mb-2 block">Phone Number</label>
+                  <Input placeholder="+91 99700 62565" required className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
+                </div>
+                <div>
+                  <label className="text-sm font-semibold text-foreground mb-2 block">Budget Range</label>
+                  <Input placeholder="₹10,000 - ₹25,000" className="bg-muted/30 border-border/30 py-5 rounded-xl focus:border-primary/50" />
+                </div>
+              </div>
+              <div>
+                <label className="text-sm font-semibold text-foreground mb-2 block">Tell Us Your Requirement</label>
+                <Textarea placeholder="I want a website for my restaurant with online menu and table booking..." rows={4} required className="bg-muted/30 border-border/30 rounded-xl focus:border-primary/50" />
+              </div>
+              <Button
+                type="submit"
+                disabled={loading}
+                className="w-full gradient-amber text-accent-foreground border-0 font-semibold py-7 rounded-xl glow-amber hover:scale-[1.02] transition-transform group btn-shine"
+              >
+                {loading ? "Sending..." : "Send Message"}
+                <Send size={16} className="ml-2 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+              </Button>
+            </form>
+          </FadeIn>
+
+          <FadeIn delay={0.1}>
+            <div className="flex flex-col justify-center space-y-8">
+              <div>
+                <h3 className="font-heading text-2xl font-bold text-foreground mb-3">Ready to grow your business?</h3>
+                <p className="text-muted-foreground text-sm leading-relaxed">
+                  We believe every small business deserves a strong online presence. Let's make it happen together —
+                  no matter your budget or tech knowledge.
+                </p>
+              </div>
+
+              <div className="space-y-4">
+                {[
+                  { icon: Phone, label: "+91 99700 62565", href: "tel:+919970062565" },
+                  { icon: Mail, label: "hello@vyapartech.in", href: "mailto:hello@vyapartech.in" },
+                  { icon: MapPin, label: "Pune, Maharashtra, India", href: "#" },
+                ].map((item) => (
+                  <a
+                    key={item.label}
+                    href={item.href}
+                    className="flex items-center gap-4 text-sm text-muted-foreground hover:text-primary transition-colors p-3 rounded-xl hover:bg-muted/20"
+                  >
+                    <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20">
+                      <item.icon size={20} className="text-primary" />
+                    </div>
+                    <span className="font-medium">{item.label}</span>
+                  </a>
+                ))}
+              </div>
+
+              <div className="p-5 rounded-2xl border border-secondary/20 bg-secondary/5 border-glow">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 rounded-full gradient-accent flex items-center justify-center shadow-lg">
+                    <ArrowRight size={18} className="text-primary-foreground" />
+                  </div>
+                  <div>
+                    <div className="font-heading font-bold text-foreground text-sm">Free Consultation</div>
+                    <div className="text-xs text-muted-foreground">Get expert advice at zero cost</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </motion.div>
+          </FadeIn>
         </div>
       </div>
     </section>

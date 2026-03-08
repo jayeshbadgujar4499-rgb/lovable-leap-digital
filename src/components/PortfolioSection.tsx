@@ -1,7 +1,6 @@
-import { motion } from "framer-motion";
 import { ExternalLink } from "lucide-react";
-import { useState } from "react";
-import { useScrollReveal } from "@/hooks/useGsapScrollTrigger";
+import { useState, useEffect, useRef } from "react";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const projects = [
   { title: "Sweet Bites Bakery", category: "Cake Shop", gradient: "from-[hsl(239_84%_60%)] to-[hsl(187_94%_43%)]", description: "Complete online presence with cake catalog & WhatsApp ordering.", tags: ["Website", "WhatsApp", "Catalog"] },
@@ -13,6 +12,63 @@ const projects = [
 ];
 
 const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
+
+const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(24px)";
+    el.style.transition = `opacity 0.5s ease-out ${index * 0.06}s, transform 0.5s ease-out ${index * 0.06}s`;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.1 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [index]);
+
+  return (
+    <div
+      ref={ref}
+      className="glass-card overflow-hidden group cursor-pointer border-glow hover:-translate-y-1 hover:scale-[1.01] transition-transform duration-300"
+    >
+      <div className={`h-52 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+        <div className="absolute inset-0 flex items-center justify-center">
+          <span className="font-heading text-[120px] font-black text-foreground/[0.06] select-none">{project.title.charAt(0)}</span>
+        </div>
+        <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-500 flex items-center justify-center">
+          <div className="w-12 h-12 rounded-full bg-foreground/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+            <ExternalLink size={20} className="text-background" />
+          </div>
+        </div>
+        <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/10 backdrop-blur-md text-foreground text-[10px] font-bold uppercase tracking-wider border border-foreground/10">
+          {project.category}
+        </div>
+      </div>
+      <div className="p-6">
+        <h3 className="font-heading text-lg font-bold text-foreground">{project.title}</h3>
+        <p className="text-sm text-muted-foreground mt-2 mb-4">{project.description}</p>
+        <div className="flex flex-wrap gap-1.5">
+          {project.tags.map(tag => (
+            <span key={tag} className="px-2.5 py-1 rounded-md bg-primary/10 text-[10px] font-semibold text-primary border border-primary/20">
+              {tag}
+            </span>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+};
 
 const PortfolioSection = () => {
   const [active, setActive] = useState("All");
@@ -34,7 +90,6 @@ const PortfolioSection = () => {
           </p>
         </div>
 
-        {/* Category filter */}
         <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
           {categories.map(cat => (
             <button
@@ -53,39 +108,7 @@ const PortfolioSection = () => {
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
           {filtered.map((project, i) => (
-            <motion.div
-              key={project.title}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.08 }}
-              className="glass-card overflow-hidden group cursor-pointer border-glow hover:-translate-y-1 hover:scale-[1.01] transition-transform duration-300"
-            >
-              <div className={`h-52 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <span className="font-heading text-[120px] font-black text-foreground/[0.06] select-none">{project.title.charAt(0)}</span>
-                </div>
-                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-500 flex items-center justify-center">
-                  <div className="w-12 h-12 rounded-full bg-foreground/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
-                    <ExternalLink size={20} className="text-background" />
-                  </div>
-                </div>
-                <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/10 backdrop-blur-md text-foreground text-[10px] font-bold uppercase tracking-wider border border-foreground/10">
-                  {project.category}
-                </div>
-              </div>
-              <div className="p-6">
-                <h3 className="font-heading text-lg font-bold text-foreground">{project.title}</h3>
-                <p className="text-sm text-muted-foreground mt-2 mb-4">{project.description}</p>
-                <div className="flex flex-wrap gap-1.5">
-                  {project.tags.map(tag => (
-                    <span key={tag} className="px-2.5 py-1 rounded-md bg-primary/10 text-[10px] font-semibold text-primary border border-primary/20">
-                      {tag}
-                    </span>
-                  ))}
-                </div>
-              </div>
-            </motion.div>
+            <ProjectCard key={project.title} project={project} index={i} />
           ))}
         </div>
       </div>
