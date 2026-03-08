@@ -1,11 +1,11 @@
 import { motion } from "framer-motion";
 import { ArrowRight, ChevronDown } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useEffect, useState, lazy, Suspense } from "react";
+import { useEffect, useState, lazy, Suspense, memo } from "react";
 
 const HeroScene = lazy(() => import("./HeroScene"));
 
-const CountUp = ({ target, suffix = "" }: { target: number; suffix: string }) => {
+const CountUp = memo(({ target, suffix = "" }: { target: number; suffix: string }) => {
   const [count, setCount] = useState(0);
   useEffect(() => {
     let start = 0;
@@ -23,7 +23,9 @@ const CountUp = ({ target, suffix = "" }: { target: number; suffix: string }) =>
     return () => clearInterval(timer);
   }, [target]);
   return <>{count}{suffix}</>;
-};
+});
+
+CountUp.displayName = "CountUp";
 
 const HeroSection = () => {
   return (
@@ -32,15 +34,9 @@ const HeroSection = () => {
         <HeroScene />
       </Suspense>
 
-      {/* Radial gradient overlays */}
+      {/* Radial gradient overlay */}
       <div className="absolute inset-0 z-[1]" style={{
         background: "radial-gradient(ellipse at 50% 50%, transparent 30%, hsl(222 47% 11%) 80%)"
-      }} />
-
-      {/* Dot grid */}
-      <div className="absolute inset-0 z-[1] opacity-[0.03]" style={{
-        backgroundImage: "radial-gradient(circle, hsl(210 40% 98%) 1px, transparent 1px)",
-        backgroundSize: "40px 40px"
       }} />
 
       <div className="container mx-auto px-4 relative z-10 pt-20">
@@ -49,7 +45,7 @@ const HeroSection = () => {
           <motion.div
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.6, delay: 0.2 }}
+            transition={{ duration: 0.5, delay: 0.2 }}
             className="inline-flex items-center gap-2 px-5 py-2.5 rounded-full border border-primary/20 bg-primary/5 backdrop-blur-sm mb-8"
           >
             <span className="relative flex h-2 w-2">
@@ -61,9 +57,9 @@ const HeroSection = () => {
 
           {/* Heading */}
           <motion.h1
-            initial={{ opacity: 0, y: 60 }}
+            initial={{ opacity: 0, y: 40 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 1, delay: 0.3, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.8, delay: 0.3 }}
             className="font-heading text-4xl sm:text-6xl md:text-7xl lg:text-8xl font-bold leading-[0.95] mb-7"
           >
             <span className="text-foreground block">We Build</span>
@@ -73,9 +69,9 @@ const HeroSection = () => {
 
           {/* Subtext */}
           <motion.p
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.5 }}
+            transition={{ duration: 0.6, delay: 0.5 }}
             className="text-base md:text-lg max-w-2xl mx-auto mb-10 leading-relaxed text-muted-foreground"
           >
             Helping small shops, restaurants, salons & local businesses in Pune get more customers
@@ -84,9 +80,9 @@ const HeroSection = () => {
 
           {/* CTAs */}
           <motion.div
-            initial={{ opacity: 0, y: 30 }}
+            initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 0.7 }}
+            transition={{ duration: 0.6, delay: 0.6 }}
             className="flex flex-col sm:flex-row items-center justify-center gap-4"
           >
             <Button
@@ -111,9 +107,9 @@ const HeroSection = () => {
 
           {/* Stats */}
           <motion.div
-            initial={{ opacity: 0, y: 50 }}
+            initial={{ opacity: 0, y: 30 }}
             animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, delay: 1 }}
+            transition={{ duration: 0.6, delay: 0.8 }}
             className="flex items-center justify-center gap-4 md:gap-8 mt-20"
           >
             {[
@@ -121,16 +117,15 @@ const HeroSection = () => {
               { value: 40, suffix: "+", label: "Happy Clients" },
               { value: 3, suffix: "+", label: "Years Experience" },
             ].map((stat) => (
-              <motion.div
+              <div
                 key={stat.label}
-                whileHover={{ scale: 1.05 }}
-                className="text-center px-6 md:px-10 py-5 rounded-2xl bg-muted/20 backdrop-blur-sm border border-border/30 border-glow"
+                className="text-center px-6 md:px-10 py-5 rounded-2xl bg-muted/20 backdrop-blur-sm border border-border/30 border-glow hover:scale-105 transition-transform duration-300"
               >
                 <div className="font-heading text-3xl md:text-4xl font-bold text-gradient">
                   <CountUp target={stat.value} suffix={stat.suffix} />
                 </div>
                 <div className="text-[10px] md:text-xs mt-1 font-medium text-muted-foreground">{stat.label}</div>
-              </motion.div>
+              </div>
             ))}
           </motion.div>
         </div>

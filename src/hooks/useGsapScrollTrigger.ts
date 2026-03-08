@@ -13,33 +13,27 @@ export const useScrollReveal = (options?: { y?: number; duration?: number; delay
     const children = ref.current.children;
     const elements = children.length > 1 ? Array.from(children) : [ref.current];
 
-    gsap.fromTo(
-      elements,
-      {
-        opacity: 0,
-        y: options?.y ?? 60,
-        scale: 0.95,
-      },
-      {
-        opacity: 1,
-        y: 0,
-        scale: 1,
-        duration: options?.duration ?? 1,
-        stagger: options?.stagger ?? 0.1,
-        delay: options?.delay ?? 0,
-        ease: "power4.out",
-        scrollTrigger: {
-          trigger: ref.current,
-          start: "top 85%",
-          end: "bottom 20%",
-          toggleActions: "play none none reverse",
-        },
-      }
-    );
+    const ctx = gsap.context(() => {
+      gsap.fromTo(
+        elements,
+        { opacity: 0, y: options?.y ?? 40 },
+        {
+          opacity: 1,
+          y: 0,
+          duration: options?.duration ?? 0.8,
+          stagger: options?.stagger ?? 0.1,
+          delay: options?.delay ?? 0,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: ref.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+        }
+      );
+    }, ref);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    return () => ctx.revert();
   }, []);
 
   return ref;
@@ -51,20 +45,20 @@ export const useParallax = (speed: number = 0.5) => {
   useEffect(() => {
     if (!ref.current) return;
 
-    gsap.to(ref.current, {
-      y: () => speed * 100,
-      ease: "none",
-      scrollTrigger: {
-        trigger: ref.current,
-        start: "top bottom",
-        end: "bottom top",
-        scrub: true,
-      },
-    });
+    const ctx = gsap.context(() => {
+      gsap.to(ref.current, {
+        y: () => speed * 100,
+        ease: "none",
+        scrollTrigger: {
+          trigger: ref.current,
+          start: "top bottom",
+          end: "bottom top",
+          scrub: true,
+        },
+      });
+    }, ref);
 
-    return () => {
-      ScrollTrigger.getAll().forEach(t => t.kill());
-    };
+    return () => ctx.revert();
   }, []);
 
   return ref;

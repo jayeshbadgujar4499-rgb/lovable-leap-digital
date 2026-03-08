@@ -24,12 +24,6 @@ const ContactSection = () => {
 
   return (
     <section id="contact" className="section-padding relative overflow-hidden">
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "radial-gradient(circle, hsl(239 84% 67%) 1px, transparent 1px)",
-        backgroundSize: "48px 48px"
-      }} />
-      <div className="absolute -left-40 top-1/2 -translate-y-1/2 w-[400px] h-[400px] rounded-full opacity-[0.05] blur-[100px]" style={{ background: "hsl(239 84% 67%)" }} />
-
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-16">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">Get In Touch</span>
@@ -44,10 +38,10 @@ const ContactSection = () => {
         <div className="grid lg:grid-cols-2 gap-12 max-w-5xl mx-auto">
           <motion.form
             onSubmit={handleSubmit}
-            initial={{ opacity: 0, x: -40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.6 }}
             className="glass-card p-8 md:p-10 space-y-5 border-glow"
           >
             <div className="grid sm:grid-cols-2 gap-4">
@@ -85,10 +79,10 @@ const ContactSection = () => {
           </motion.form>
 
           <motion.div
-            initial={{ opacity: 0, x: 40 }}
-            whileInView={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
-            transition={{ duration: 0.8, ease: [0.23, 1, 0.32, 1] }}
+            transition={{ duration: 0.6, delay: 0.1 }}
             className="flex flex-col justify-center space-y-8"
           >
             <div>
@@ -105,17 +99,16 @@ const ContactSection = () => {
                 { icon: Mail, label: "hello@vyapartech.in", href: "mailto:hello@vyapartech.in" },
                 { icon: MapPin, label: "Pune, Maharashtra, India", href: "#" },
               ].map((item) => (
-                <motion.a
+                <a
                   key={item.label}
                   href={item.href}
-                  whileHover={{ x: 4 }}
                   className="flex items-center gap-4 text-sm text-muted-foreground hover:text-primary transition-colors p-3 rounded-xl hover:bg-muted/20"
                 >
                   <div className="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center shrink-0 border border-primary/20">
                     <item.icon size={20} className="text-primary" />
                   </div>
                   <span className="font-medium">{item.label}</span>
-                </motion.a>
+                </a>
               ))}
             </div>
 

@@ -1,39 +1,19 @@
 import { Heart, ArrowUp } from "lucide-react";
-import { motion, useScroll, useTransform } from "framer-motion";
-import { useRef } from "react";
+import { motion } from "framer-motion";
 
 const Footer = () => {
-  const footerRef = useRef<HTMLElement>(null);
-  const { scrollYProgress } = useScroll({
-    target: footerRef,
-    offset: ["start end", "end end"],
-  });
-  const opacity = useTransform(scrollYProgress, [0, 0.5], [0, 1]);
-  const y = useTransform(scrollYProgress, [0, 0.5], [40, 0]);
-
   return (
-    <footer ref={footerRef} className="relative overflow-hidden border-t border-border/30" style={{ background: "hsl(222 47% 6%)" }}>
-      {/* Animated gradient top border */}
+    <footer className="relative overflow-hidden border-t border-border/30" style={{ background: "hsl(222 47% 6%)" }}>
       <div className="h-px w-full gradient-accent opacity-40" />
 
-      {/* Grid overlay */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "linear-gradient(hsl(210 40% 98%) 1px, transparent 1px), linear-gradient(90deg, hsl(210 40% 98%) 1px, transparent 1px)",
-        backgroundSize: "40px 40px"
-      }} />
-
-      <motion.div className="container mx-auto px-4 py-16 relative" style={{ opacity, y }}>
+      <div className="container mx-auto px-4 py-16 relative">
         <div className="grid md:grid-cols-3 gap-12 items-start">
           {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
-              <motion.div
-                animate={{ rotateY: [0, 360] }}
-                transition={{ duration: 8, repeat: Infinity, ease: "linear" }}
-                className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center shadow-lg"
-              >
+              <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
                 <span className="font-heading font-bold text-primary-foreground text-sm">V</span>
-              </motion.div>
+              </div>
               <span className="font-heading font-bold text-xl text-foreground">
                 Vyapar<span className="text-gradient">Tech</span>
               </span>
@@ -47,18 +27,14 @@ const Footer = () => {
           <div>
             <h4 className="font-heading font-bold text-foreground text-sm mb-4">Quick Links</h4>
             <div className="grid grid-cols-2 gap-2">
-              {["Services", "Portfolio", "Pricing", "Process", "Testimonials", "Contact"].map((link, i) => (
-                <motion.a
+              {["Services", "Portfolio", "Pricing", "Process", "Testimonials", "Contact"].map((link) => (
+                <a
                   key={link}
                   href={`#${link.toLowerCase()}`}
-                  initial={{ opacity: 0, x: -10 }}
-                  whileInView={{ opacity: 1, x: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ delay: i * 0.05 }}
                   className="text-sm py-1 text-muted-foreground hover:text-primary transition-colors"
                 >
                   {link}
-                </motion.a>
+                </a>
               ))}
             </div>
           </div>
@@ -81,18 +57,17 @@ const Footer = () => {
             © {new Date().getFullYear()} VyaparTech. Made with <Heart size={12} className="text-destructive fill-destructive mx-1" /> in Pune
           </div>
 
-          <motion.a
+          <a
             href="#home"
-            whileHover={{ y: -3, scale: 1.05 }}
             className="flex items-center gap-2 text-xs font-medium text-muted-foreground hover:text-primary transition-colors group"
           >
             Back to top
             <div className="w-9 h-9 rounded-full bg-primary/10 border border-primary/20 flex items-center justify-center group-hover:bg-primary/20 transition-colors">
               <ArrowUp size={14} className="text-primary" />
             </div>
-          </motion.a>
+          </a>
         </div>
-      </motion.div>
+      </div>
     </footer>
   );
 };

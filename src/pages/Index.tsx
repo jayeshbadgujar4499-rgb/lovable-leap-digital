@@ -1,17 +1,20 @@
+import { lazy, Suspense } from "react";
 import Navbar from "@/components/Navbar";
 import HeroSection from "@/components/HeroSection";
-import ServicesSection from "@/components/ServicesSection";
-import ProcessSection from "@/components/ProcessSection";
-import PortfolioSection from "@/components/PortfolioSection";
-import WhyChooseSection from "@/components/WhyChooseSection";
-import PricingSection from "@/components/PricingSection";
-import TestimonialsSection from "@/components/TestimonialsSection";
-import ContactSection from "@/components/ContactSection";
-import Footer from "@/components/Footer";
-import WhatsAppButton from "@/components/WhatsAppButton";
 import ScrollProgress from "@/components/ScrollProgress";
 import GrainOverlay from "@/components/GrainOverlay";
+import WhatsAppButton from "@/components/WhatsAppButton";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
+
+// Lazy load below-fold sections
+const ServicesSection = lazy(() => import("@/components/ServicesSection"));
+const ProcessSection = lazy(() => import("@/components/ProcessSection"));
+const PortfolioSection = lazy(() => import("@/components/PortfolioSection"));
+const WhyChooseSection = lazy(() => import("@/components/WhyChooseSection"));
+const PricingSection = lazy(() => import("@/components/PricingSection"));
+const TestimonialsSection = lazy(() => import("@/components/TestimonialsSection"));
+const ContactSection = lazy(() => import("@/components/ContactSection"));
+const Footer = lazy(() => import("@/components/Footer"));
 
 const Index = () => {
   useSmoothScroll();
@@ -22,14 +25,16 @@ const Index = () => {
       <ScrollProgress />
       <Navbar />
       <HeroSection />
-      <ServicesSection />
-      <ProcessSection />
-      <PortfolioSection />
-      <WhyChooseSection />
-      <PricingSection />
-      <TestimonialsSection />
-      <ContactSection />
-      <Footer />
+      <Suspense fallback={null}>
+        <ServicesSection />
+        <ProcessSection />
+        <PortfolioSection />
+        <WhyChooseSection />
+        <PricingSection />
+        <TestimonialsSection />
+        <ContactSection />
+        <Footer />
+      </Suspense>
       <WhatsAppButton />
     </div>
   );
