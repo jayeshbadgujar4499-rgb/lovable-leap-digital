@@ -13,16 +13,16 @@ const ProcessSection = () => {
   const headingRef = useScrollReveal();
 
   return (
-    <section id="process" className="section-padding relative overflow-hidden">
+    <section id="process" className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
       {/* Grid background */}
       <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "linear-gradient(hsl(210 40% 96%) 1px, transparent 1px), linear-gradient(90deg, hsl(210 40% 96%) 1px, transparent 1px)",
+        backgroundImage: "linear-gradient(hsl(210 40% 98%) 1px, transparent 1px), linear-gradient(90deg, hsl(210 40% 98%) 1px, transparent 1px)",
         backgroundSize: "60px 60px"
       }} />
 
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">
+          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">
             Our Process
           </span>
           <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-3">
@@ -36,7 +36,7 @@ const ProcessSection = () => {
         <div className="max-w-4xl mx-auto relative">
           {/* Vertical glowing line */}
           <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px" style={{
-            background: "linear-gradient(to bottom, hsl(24 95% 53% / 0.5), hsl(24 95% 53% / 0.1), transparent)"
+            background: "linear-gradient(to bottom, hsl(239 84% 67% / 0.5), hsl(187 94% 43% / 0.3), transparent)"
           }} />
 
           {steps.map((step, i) => (
@@ -58,7 +58,7 @@ const ProcessSection = () => {
                       <step.icon size={20} className="text-primary-foreground" />
                     </div>
                     <div>
-                      <span className="text-primary font-bold text-xs tracking-wider">STEP {step.step}</span>
+                      <span className="text-secondary font-bold text-xs tracking-wider">STEP {step.step}</span>
                       <h3 className="font-heading text-lg font-bold text-foreground">{step.title}</h3>
                     </div>
                   </div>
@@ -67,7 +67,7 @@ const ProcessSection = () => {
               </div>
 
               {/* Timeline dot */}
-              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full gradient-accent items-center justify-center text-primary-foreground font-bold text-sm shadow-lg z-10 glow-orange">
+              <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full gradient-accent items-center justify-center text-primary-foreground font-bold text-sm shadow-lg z-10 glow-primary">
                 {step.step}
               </div>
 

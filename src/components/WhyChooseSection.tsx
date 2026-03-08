@@ -15,13 +15,13 @@ const WhyChooseSection = () => {
   const headingRef = useScrollReveal();
 
   return (
-    <section className="section-padding relative overflow-hidden">
-      <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(24 95% 53%)" }} />
+    <section className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
+      <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(187 94% 43%)" }} />
 
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
           <div ref={headingRef}>
-            <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">Why Us</span>
+            <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">Why Us</span>
             <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground leading-tight">
               Why Choose <br />
               <span className="text-gradient">VyaparTech?</span>

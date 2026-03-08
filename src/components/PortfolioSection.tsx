@@ -4,12 +4,12 @@ import { useState } from "react";
 import { useScrollReveal } from "@/hooks/useGsapScrollTrigger";
 
 const projects = [
-  { title: "Sweet Bites Bakery", category: "Cake Shop", gradient: "from-[hsl(350_80%_50%)] to-[hsl(24_95%_45%)]", description: "Complete online presence with cake catalog & WhatsApp ordering.", tags: ["Website", "WhatsApp", "Catalog"] },
-  { title: "FitZone Gym", category: "Fitness Center", gradient: "from-[hsl(210_80%_45%)] to-[hsl(180_70%_35%)]", description: "Membership booking system with class schedules and trainer profiles.", tags: ["Booking", "Dashboard", "Payments"] },
-  { title: "Glamour Salon", category: "Beauty Salon", gradient: "from-[hsl(280_70%_45%)] to-[hsl(320_80%_45%)]", description: "Appointment booking website with service catalog and pricing.", tags: ["Appointments", "Gallery", "Reviews"] },
-  { title: "Spice Route Restaurant", category: "Restaurant", gradient: "from-[hsl(24_95%_45%)] to-[hsl(0_80%_40%)]", description: "Digital menu, table reservation, and online food ordering system.", tags: ["Menu", "Booking", "Orders"] },
-  { title: "MediCare Clinic", category: "Healthcare", gradient: "from-[hsl(160_60%_35%)] to-[hsl(180_50%_30%)]", description: "Patient appointment system with doctor profiles and health blog.", tags: ["Health Portal", "Appointments", "Blog"] },
-  { title: "Bright Minds Academy", category: "Education", gradient: "from-[hsl(45_90%_45%)] to-[hsl(24_95%_45%)]", description: "Course enrollment platform with student portal and fee management.", tags: ["LMS", "Enrollment", "Portal"] },
+  { title: "Sweet Bites Bakery", category: "Cake Shop", gradient: "from-[hsl(239_84%_60%)] to-[hsl(187_94%_43%)]", description: "Complete online presence with cake catalog & WhatsApp ordering.", tags: ["Website", "WhatsApp", "Catalog"] },
+  { title: "FitZone Gym", category: "Fitness Center", gradient: "from-[hsl(187_94%_43%)] to-[hsl(160_60%_40%)]", description: "Membership booking system with class schedules and trainer profiles.", tags: ["Booking", "Dashboard", "Payments"] },
+  { title: "Glamour Salon", category: "Beauty Salon", gradient: "from-[hsl(280_70%_55%)] to-[hsl(239_84%_60%)]", description: "Appointment booking website with service catalog and pricing.", tags: ["Appointments", "Gallery", "Reviews"] },
+  { title: "Spice Route Restaurant", category: "Restaurant", gradient: "from-[hsl(38_92%_50%)] to-[hsl(15_80%_45%)]", description: "Digital menu, table reservation, and online food ordering system.", tags: ["Menu", "Booking", "Orders"] },
+  { title: "MediCare Clinic", category: "Healthcare", gradient: "from-[hsl(160_60%_40%)] to-[hsl(187_94%_35%)]", description: "Patient appointment system with doctor profiles and health blog.", tags: ["Health Portal", "Appointments", "Blog"] },
+  { title: "Bright Minds Academy", category: "Education", gradient: "from-[hsl(239_84%_67%)] to-[hsl(280_70%_55%)]", description: "Course enrollment platform with student portal and fee management.", tags: ["LMS", "Enrollment", "Portal"] },
 ];
 
 const categories = ["All", ...Array.from(new Set(projects.map(p => p.category)))];
@@ -21,7 +21,7 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="section-padding relative overflow-hidden">
-      <div className="absolute top-20 left-20 w-64 h-64 rounded-full opacity-[0.04] blur-[80px]" style={{ background: "hsl(24 95% 53%)" }} />
+      <div className="absolute top-20 left-20 w-64 h-64 rounded-full opacity-[0.04] blur-[80px]" style={{ background: "hsl(187 94% 43%)" }} />
 
       <div className="container mx-auto">
         <div ref={headingRef} className="text-center mb-12">
@@ -42,7 +42,7 @@ const PortfolioSection = () => {
               onClick={() => setActive(cat)}
               className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 border ${
                 active === cat
-                  ? "gradient-accent text-primary-foreground border-primary/30 shadow-lg glow-orange"
+                  ? "gradient-accent text-primary-foreground border-primary/30 shadow-lg glow-primary"
                   : "bg-muted/20 text-muted-foreground border-border/30 hover:border-primary/20 hover:text-foreground"
               }`}
             >
@@ -85,7 +85,7 @@ const PortfolioSection = () => {
                 <p className="text-sm text-muted-foreground mt-2 mb-4">{project.description}</p>
                 <div className="flex flex-wrap gap-1.5">
                   {project.tags.map(tag => (
-                    <span key={tag} className="px-2.5 py-1 rounded-md bg-muted/40 text-[10px] font-semibold text-muted-foreground border border-border/30">
+                    <span key={tag} className="px-2.5 py-1 rounded-md bg-primary/10 text-[10px] font-semibold text-primary border border-primary/20">
                       {tag}
                     </span>
                   ))}

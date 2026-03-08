@@ -66,12 +66,12 @@ const Navbar = () => {
       <motion.div
         className={`border-b transition-colors duration-500 ${scrolled ? "border-border/40" : "border-transparent"}`}
         style={{
-          backgroundColor: `hsl(225 15% 6% / ${bgOpacity.get()})`,
+          backgroundColor: `hsl(222 47% 11% / ${bgOpacity.get()})`,
           backdropFilter: `blur(${blur.get()}px)`,
         }}
       >
         <div className="container mx-auto flex items-center justify-between h-16 px-4">
-          {/* 3D Logo */}
+          {/* Logo */}
           <a href="#home" className="flex items-center gap-2 group" style={{ perspective: "600px" }}>
             <motion.div
               whileHover={{ rotateY: 15, rotateX: -10 }}
@@ -92,7 +92,7 @@ const Navbar = () => {
                 {link.label}
               </MagneticLink>
             ))}
-            <Button asChild className="gradient-accent border-0 text-primary-foreground font-semibold glow-orange btn-shine rounded-xl px-6">
+            <Button asChild className="gradient-accent border-0 text-primary-foreground font-semibold glow-primary btn-shine rounded-xl px-6">
               <a href="#contact">Get Free Quote</a>
             </Button>
           </div>

@@ -12,17 +12,16 @@ const TestimonialsSection = () => {
   const headingRef = useScrollReveal();
 
   return (
-    <section id="testimonials" className="section-padding relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-[0.04] blur-[100px]" style={{ background: "hsl(24 95% 53%)" }} />
+    <section id="testimonials" className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
+      <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-[0.04] blur-[100px]" style={{ background: "hsl(239 84% 67%)" }} />
       <div className="absolute inset-0 opacity-[0.015]" style={{
-        backgroundImage: "radial-gradient(circle, hsl(210 40% 96%) 1px, transparent 1px)",
+        backgroundImage: "radial-gradient(circle, hsl(210 40% 98%) 1px, transparent 1px)",
         backgroundSize: "40px 40px"
       }} />
 
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">Testimonials</span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">Testimonials</span>
           <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-3">
             What Our <span className="text-gradient">Clients Say</span>
           </h2>
@@ -43,7 +42,7 @@ const TestimonialsSection = () => {
 
               <div className="flex items-center gap-1 mb-5">
                 {Array.from({ length: t.rating }).map((_, j) => (
-                  <Star key={j} size={15} className="fill-primary text-primary" />
+                  <Star key={j} size={15} className="fill-accent text-accent" />
                 ))}
               </div>
 

@@ -10,7 +10,6 @@ const AnimatedSphere = () => {
     if (!meshRef.current) return;
     meshRef.current.rotation.x = clock.getElapsedTime() * 0.1;
     meshRef.current.rotation.y = clock.getElapsedTime() * 0.15;
-    // Subtle mouse follow
     meshRef.current.position.x += (mouse.x * 0.3 - meshRef.current.position.x) * 0.02;
     meshRef.current.position.y += (mouse.y * 0.3 - meshRef.current.position.y) * 0.02;
   });
@@ -20,7 +19,7 @@ const AnimatedSphere = () => {
       <mesh ref={meshRef} scale={2.2}>
         <icosahedronGeometry args={[1, 4]} />
         <MeshDistortMaterial
-          color="#F97316"
+          color="#6366F1"
           roughness={0.2}
           metalness={0.8}
           distort={0.3}
@@ -63,7 +62,7 @@ const ParticleField = () => {
           itemSize={3}
         />
       </bufferGeometry>
-      <pointsMaterial size={0.03} color="#F97316" transparent opacity={0.6} sizeAttenuation />
+      <pointsMaterial size={0.03} color="#06B6D4" transparent opacity={0.6} sizeAttenuation />
     </points>
   );
 };
@@ -78,9 +77,9 @@ const HeroScene = () => {
         style={{ background: "transparent" }}
       >
         <ambientLight intensity={0.3} />
-        <directionalLight position={[5, 5, 5]} intensity={1} color="#F97316" />
-        <directionalLight position={[-3, -3, 2]} intensity={0.4} color="#3b82f6" />
-        <pointLight position={[0, 0, 3]} intensity={0.5} color="#F97316" />
+        <directionalLight position={[5, 5, 5]} intensity={1} color="#6366F1" />
+        <directionalLight position={[-3, -3, 2]} intensity={0.4} color="#06B6D4" />
+        <pointLight position={[0, 0, 3]} intensity={0.5} color="#6366F1" />
         <AnimatedSphere />
         <ParticleField />
         <Environment preset="night" />
