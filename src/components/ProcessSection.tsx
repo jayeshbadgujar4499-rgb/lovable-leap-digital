@@ -17,7 +17,7 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
     if (!el) return;
     el.style.opacity = "0";
     el.style.transform = "translateY(24px)";
-    el.style.transition = `opacity 0.5s ease-out ${index * 0.12}s, transform 0.5s ease-out ${index * 0.12}s`;
+    el.style.transition = `opacity 0.6s ease-out ${index * 0.15}s, transform 0.6s ease-out ${index * 0.15}s`;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -38,24 +38,26 @@ const StepCard = ({ step, index }: { step: typeof steps[0]; index: number }) => 
   return (
     <div
       ref={ref}
-      className={`relative flex items-start gap-8 mb-16 last:mb-0 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
+      className={`relative flex items-start gap-8 mb-20 last:mb-0 ${index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
     >
       <div className={`flex-1 ${index % 2 === 0 ? "md:text-right md:pr-16" : "md:text-left md:pl-16"}`}>
-        <div className="p-7 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm inline-block text-left border-glow hover:scale-[1.01] transition-transform duration-300">
-          <div className="flex items-center gap-3 mb-3">
-            <div className="w-11 h-11 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
+        <div className="p-8 rounded-2xl border border-border/20 backdrop-blur-sm inline-block text-left border-glow hover:scale-[1.01] transition-all duration-500 inner-glow"
+          style={{ background: "linear-gradient(135deg, hsl(217 33% 14% / 0.6), hsl(217 33% 12% / 0.3))" }}
+        >
+          <div className="flex items-center gap-4 mb-4">
+            <div className="w-12 h-12 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
               <Icon size={20} className="text-primary-foreground" />
             </div>
             <div>
-              <span className="text-secondary font-bold text-xs tracking-wider">STEP {step.step}</span>
+              <span className="text-secondary font-bold text-[11px] tracking-[0.15em] uppercase">STEP {step.step}</span>
               <h3 className="font-heading text-lg font-bold text-foreground">{step.title}</h3>
             </div>
           </div>
-          <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
+          <p className="text-sm leading-relaxed text-muted-foreground/70 font-light">{step.description}</p>
         </div>
       </div>
 
-      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-10 h-10 rounded-full gradient-accent items-center justify-center text-primary-foreground font-bold text-sm shadow-lg z-10 glow-primary">
+      <div className="hidden md:flex absolute left-1/2 -translate-x-1/2 w-11 h-11 rounded-full gradient-accent items-center justify-center text-primary-foreground font-bold text-sm shadow-xl z-10 glow-primary border-2 border-background">
         {step.step}
       </div>
 
@@ -68,23 +70,24 @@ const ProcessSection = () => {
   const headingRef = useScrollReveal();
 
   return (
-    <section id="process" className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
+    <section id="process" className="section-padding relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 47% 10%) 100%)" }}>
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">
+          <span className="premium-badge mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
             Our Process
           </span>
-          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-3">
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4">
             How We <span className="text-gradient">Work</span>
           </h2>
-          <p className="mt-5 max-w-xl mx-auto text-base text-muted-foreground">
+          <p className="mt-6 max-w-xl mx-auto text-base text-muted-foreground font-light leading-relaxed">
             Simple, transparent process — from first meeting to final delivery.
           </p>
         </div>
 
         <div className="max-w-4xl mx-auto relative">
           <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px" style={{
-            background: "linear-gradient(to bottom, hsl(239 84% 67% / 0.5), hsl(187 94% 43% / 0.3), transparent)"
+            background: "linear-gradient(to bottom, hsl(239 84% 67% / 0.4), hsl(187 94% 43% / 0.2), transparent)"
           }} />
 
           {steps.map((step, i) => (

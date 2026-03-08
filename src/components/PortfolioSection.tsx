@@ -20,14 +20,14 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
     const el = ref.current;
     if (!el) return;
     el.style.opacity = "0";
-    el.style.transform = "translateY(24px)";
-    el.style.transition = `opacity 0.5s ease-out ${index * 0.06}s, transform 0.5s ease-out ${index * 0.06}s`;
+    el.style.transform = "translateY(24px) scale(0.98)";
+    el.style.transition = `opacity 0.6s ease-out ${index * 0.08}s, transform 0.6s ease-out ${index * 0.08}s`;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
         if (entry.isIntersecting) {
           el.style.opacity = "1";
-          el.style.transform = "translateY(0)";
+          el.style.transform = "translateY(0) scale(1)";
           observer.unobserve(el);
         }
       },
@@ -40,27 +40,27 @@ const ProjectCard = ({ project, index }: { project: typeof projects[0]; index: n
   return (
     <div
       ref={ref}
-      className="glass-card overflow-hidden group cursor-pointer border-glow hover:-translate-y-1 hover:scale-[1.01] transition-transform duration-300"
+      className="glass-card overflow-hidden group cursor-pointer border-glow hover:-translate-y-2 transition-all duration-500"
     >
-      <div className={`h-52 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
+      <div className={`h-56 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
         <div className="absolute inset-0 flex items-center justify-center">
-          <span className="font-heading text-[120px] font-black text-foreground/[0.06] select-none">{project.title.charAt(0)}</span>
+          <span className="font-heading text-[140px] font-black text-foreground/[0.06] select-none">{project.title.charAt(0)}</span>
         </div>
-        <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-500 flex items-center justify-center">
-          <div className="w-12 h-12 rounded-full bg-foreground/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
+        <div className="absolute inset-0 bg-background/0 group-hover:bg-background/30 transition-colors duration-500 flex items-center justify-center">
+          <div className="w-14 h-14 rounded-full bg-foreground/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300 shadow-xl">
             <ExternalLink size={20} className="text-background" />
           </div>
         </div>
-        <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/10 backdrop-blur-md text-foreground text-[10px] font-bold uppercase tracking-wider border border-foreground/10">
+        <div className="absolute top-4 left-4 px-3 py-1.5 rounded-full bg-background/10 backdrop-blur-xl text-foreground text-[10px] font-bold uppercase tracking-wider border border-foreground/10">
           {project.category}
         </div>
       </div>
-      <div className="p-6">
+      <div className="p-7">
         <h3 className="font-heading text-lg font-bold text-foreground">{project.title}</h3>
-        <p className="text-sm text-muted-foreground mt-2 mb-4">{project.description}</p>
+        <p className="text-sm text-muted-foreground/70 mt-2 mb-5 font-light leading-relaxed">{project.description}</p>
         <div className="flex flex-wrap gap-1.5">
           {project.tags.map(tag => (
-            <span key={tag} className="px-2.5 py-1 rounded-md bg-primary/10 text-[10px] font-semibold text-primary border border-primary/20">
+            <span key={tag} className="px-3 py-1 rounded-full bg-primary/8 text-[10px] font-semibold text-primary/80 border border-primary/15 tracking-wide">
               {tag}
             </span>
           ))}
@@ -77,28 +77,31 @@ const PortfolioSection = () => {
 
   return (
     <section id="portfolio" className="section-padding relative overflow-hidden">
-      <div className="absolute top-20 left-20 w-64 h-64 rounded-full opacity-[0.04] blur-[80px]" style={{ background: "hsl(187 94% 43%)" }} />
+      <div className="absolute top-20 left-20 w-[400px] h-[400px] rounded-full opacity-[0.03] blur-[120px]" style={{ background: "hsl(187 94% 43%)" }} />
 
       <div className="container mx-auto">
-        <div ref={headingRef} className="text-center mb-12">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">Our Work</span>
-          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-3">
+        <div ref={headingRef} className="text-center mb-14">
+          <span className="premium-badge mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-secondary animate-pulse" />
+            Our Work
+          </span>
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4">
             Recent <span className="text-gradient">Projects</span>
           </h2>
-          <p className="text-muted-foreground mt-5 max-w-xl mx-auto text-base">
+          <p className="text-muted-foreground mt-6 max-w-xl mx-auto text-base font-light leading-relaxed">
             See how we've helped businesses like yours succeed online.
           </p>
         </div>
 
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-12">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-14">
           {categories.map(cat => (
             <button
               key={cat}
               onClick={() => setActive(cat)}
-              className={`px-4 py-2 rounded-full text-xs font-semibold transition-all duration-300 border ${
+              className={`px-5 py-2.5 rounded-full text-xs font-semibold transition-all duration-400 border ${
                 active === cat
-                  ? "gradient-accent text-primary-foreground border-primary/30 shadow-lg glow-primary"
-                  : "bg-muted/20 text-muted-foreground border-border/30 hover:border-primary/20 hover:text-foreground"
+                  ? "gradient-accent text-primary-foreground border-transparent shadow-lg glow-primary"
+                  : "bg-transparent text-muted-foreground/70 border-border/20 hover:border-primary/20 hover:text-foreground"
               }`}
             >
               {cat}
