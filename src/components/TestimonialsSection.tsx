@@ -16,7 +16,7 @@ const TestimonialCard = ({ t, index }: { t: typeof testimonials[0]; index: numbe
     if (!el) return;
     el.style.opacity = "0";
     el.style.transform = "translateY(24px)";
-    el.style.transition = `opacity 0.5s ease-out ${index * 0.1}s, transform 0.5s ease-out ${index * 0.1}s`;
+    el.style.transition = `opacity 0.6s ease-out ${index * 0.12}s, transform 0.6s ease-out ${index * 0.12}s`;
 
     const observer = new IntersectionObserver(
       ([entry]) => {
@@ -35,27 +35,28 @@ const TestimonialCard = ({ t, index }: { t: typeof testimonials[0]; index: numbe
   return (
     <div
       ref={ref}
-      className="relative p-8 rounded-3xl border border-border/30 bg-card/40 backdrop-blur-sm group hover:border-primary/20 transition-all duration-300 border-glow hover:-translate-y-1"
+      className="relative p-8 md:p-10 rounded-3xl border border-border/15 backdrop-blur-sm group hover:border-primary/15 transition-all duration-500 border-glow hover:-translate-y-2 inner-glow"
+      style={{ background: "linear-gradient(135deg, hsl(217 33% 14% / 0.6), hsl(217 33% 12% / 0.3))" }}
     >
-      <Quote size={80} className="absolute top-4 right-4 text-primary/[0.04]" />
+      <Quote size={80} className="absolute top-4 right-4 text-primary/[0.03]" />
 
-      <div className="flex items-center gap-1 mb-5">
+      <div className="flex items-center gap-1.5 mb-6">
         {Array.from({ length: t.rating }).map((_, j) => (
-          <Star key={j} size={15} className="fill-accent text-accent" />
+          <Star key={j} size={14} className="fill-accent text-accent" />
         ))}
       </div>
 
-      <p className="text-sm leading-relaxed mb-8 relative z-10 text-muted-foreground">
+      <p className="text-sm leading-[1.8] mb-10 relative z-10 text-muted-foreground/80 font-light italic">
         "{t.text}"
       </p>
 
-      <div className="flex items-center gap-3">
-        <div className="w-11 h-11 rounded-full gradient-accent flex items-center justify-center text-primary-foreground font-bold text-xs shadow-lg">
+      <div className="flex items-center gap-4">
+        <div className="w-12 h-12 rounded-full gradient-accent flex items-center justify-center text-primary-foreground font-bold text-xs shadow-xl">
           {t.initials}
         </div>
         <div>
           <div className="font-heading font-bold text-foreground text-sm">{t.name}</div>
-          <div className="text-xs text-muted-foreground">{t.business}</div>
+          <div className="text-xs text-muted-foreground/60 mt-0.5">{t.business}</div>
         </div>
       </div>
     </div>
@@ -66,11 +67,14 @@ const TestimonialsSection = () => {
   const headingRef = useScrollReveal();
 
   return (
-    <section id="testimonials" className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
+    <section id="testimonials" className="section-padding relative overflow-hidden" style={{ background: "linear-gradient(180deg, hsl(222 47% 8%) 0%, hsl(222 47% 10%) 100%)" }}>
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-20">
-          <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">Testimonials</span>
-          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-3">
+          <span className="premium-badge mb-5">
+            <span className="w-1.5 h-1.5 rounded-full bg-accent animate-pulse" />
+            Testimonials
+          </span>
+          <h2 className="font-heading text-3xl md:text-5xl lg:text-6xl font-bold text-foreground mt-4">
             What Our <span className="text-gradient">Clients Say</span>
           </h2>
         </div>

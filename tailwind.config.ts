@@ -15,7 +15,7 @@ export default {
     extend: {
       fontFamily: {
         heading: ["Space Grotesk", "sans-serif"],
-        body: ["DM Sans", "sans-serif"],
+        body: ["Inter", "sans-serif"],
       },
       colors: {
         border: "hsl(var(--border))",
@@ -101,6 +101,10 @@ export default {
           "0%": { backgroundPosition: "-200% 0" },
           "100%": { backgroundPosition: "200% 0" },
         },
+        "fade-up": {
+          "0%": { opacity: "0", transform: "translateY(24px)" },
+          "100%": { opacity: "1", transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -110,6 +114,7 @@ export default {
         "pulse-glow": "pulse-glow 3s ease-in-out infinite",
         "rotate-slow": "rotate-slow 20s linear infinite",
         "shimmer": "shimmer 3s linear infinite",
+        "fade-up": "fade-up 0.7s ease-out both",
       },
     },
   },
