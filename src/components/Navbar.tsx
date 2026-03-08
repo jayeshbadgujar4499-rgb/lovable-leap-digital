@@ -1,5 +1,4 @@
 import { useState, useEffect, useCallback } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
@@ -39,7 +38,6 @@ const Navbar = () => {
       scrolled ? "bg-background/85 backdrop-blur-2xl border-b border-border/40 shadow-lg" : "bg-background/30 backdrop-blur-md"
     }`}>
       <div className="container mx-auto flex items-center justify-between h-16 px-4">
-        {/* Logo */}
         <a href="#home" className="flex items-center gap-2 group">
           <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center shadow-lg group-hover:shadow-primary/30 transition-shadow">
             <span className="font-heading font-bold text-primary-foreground text-sm">V</span>
@@ -49,7 +47,6 @@ const Navbar = () => {
           </span>
         </a>
 
-        {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => (
             <a
@@ -66,7 +63,6 @@ const Navbar = () => {
           </Button>
         </div>
 
-        {/* Mobile toggle */}
         <button
           onClick={() => setIsOpen(!isOpen)}
           className="md:hidden text-foreground p-2"
@@ -76,34 +72,28 @@ const Navbar = () => {
         </button>
       </div>
 
-      {/* Mobile Menu */}
-      <AnimatePresence>
-        {isOpen && (
-          <motion.div
-            initial={{ opacity: 0, height: 0 }}
-            animate={{ opacity: 1, height: "auto" }}
-            exit={{ opacity: 0, height: 0 }}
-            transition={{ duration: 0.3 }}
-            className="md:hidden bg-background/95 backdrop-blur-2xl border-b border-border"
-          >
-            <div className="flex flex-col gap-1 p-4">
-              {navLinks.map((link) => (
-                <a
-                  key={link.href}
-                  href={link.href}
-                  onClick={closeMenu}
-                  className="py-3 px-4 text-sm font-medium text-muted-foreground hover:text-foreground rounded-xl hover:bg-muted/30 transition-colors"
-                >
-                  {link.label}
-                </a>
-              ))}
-              <Button asChild className="mt-3 gradient-accent border-0 text-primary-foreground font-semibold">
-                <a href="#contact" onClick={closeMenu}>Get Free Quote</a>
-              </Button>
-            </div>
-          </motion.div>
-        )}
-      </AnimatePresence>
+      {/* Mobile Menu - CSS transition instead of framer-motion */}
+      <div
+        className={`md:hidden bg-background/95 backdrop-blur-2xl border-b border-border overflow-hidden transition-all duration-300 ${
+          isOpen ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+        }`}
+      >
+        <div className="flex flex-col gap-1 p-4">
+          {navLinks.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              onClick={closeMenu}
+              className="py-3 px-4 text-sm font-medium text-muted-foreground hover:text-foreground rounded-xl hover:bg-muted/30 transition-colors"
+            >
+              {link.label}
+            </a>
+          ))}
+          <Button asChild className="mt-3 gradient-accent border-0 text-primary-foreground font-semibold">
+            <a href="#contact" onClick={closeMenu}>Get Free Quote</a>
+          </Button>
+        </div>
+      </div>
     </nav>
   );
 };

@@ -6,7 +6,6 @@ import GrainOverlay from "@/components/GrainOverlay";
 import WhatsAppButton from "@/components/WhatsAppButton";
 import { useSmoothScroll } from "@/hooks/useSmoothScroll";
 
-// Lazy load below-fold sections
 const ServicesSection = lazy(() => import("@/components/ServicesSection"));
 const ProcessSection = lazy(() => import("@/components/ProcessSection"));
 const PortfolioSection = lazy(() => import("@/components/PortfolioSection"));

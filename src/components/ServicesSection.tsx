@@ -1,6 +1,6 @@
 import { Globe, ShoppingCart, CalendarCheck, Smartphone, Search, Wrench } from "lucide-react";
 import ServiceCard3D from "./ServiceCard3D";
-import { useScrollReveal } from "@/hooks/useGsapScrollTrigger";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const services = [
   { icon: Globe, title: "Business Websites", description: "Beautiful, fast, mobile-friendly websites that make your business look professional and attract more customers." },
@@ -16,7 +16,6 @@ const ServicesSection = () => {
 
   return (
     <section id="services" className="section-padding relative overflow-hidden">
-      {/* Background glows */}
       <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(239 84% 67%)" }} />
       <div className="absolute bottom-0 left-0 w-72 h-72 rounded-full opacity-[0.03] blur-[80px]" style={{ background: "hsl(187 94% 43%)" }} />
 

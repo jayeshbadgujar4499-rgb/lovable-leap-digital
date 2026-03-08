@@ -1,5 +1,4 @@
 import { Heart, ArrowUp } from "lucide-react";
-import { motion } from "framer-motion";
 
 const Footer = () => {
   return (
@@ -8,7 +7,6 @@ const Footer = () => {
 
       <div className="container mx-auto px-4 py-16 relative">
         <div className="grid md:grid-cols-3 gap-12 items-start">
-          {/* Brand */}
           <div>
             <div className="flex items-center gap-2 mb-4">
               <div className="w-9 h-9 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
@@ -23,7 +21,6 @@ const Footer = () => {
             </p>
           </div>
 
-          {/* Quick Links */}
           <div>
             <h4 className="font-heading font-bold text-foreground text-sm mb-4">Quick Links</h4>
             <div className="grid grid-cols-2 gap-2">
@@ -39,7 +36,6 @@ const Footer = () => {
             </div>
           </div>
 
-          {/* Contact */}
           <div>
             <h4 className="font-heading font-bold text-foreground text-sm mb-4">Get In Touch</h4>
             <div className="space-y-2 text-sm text-muted-foreground">

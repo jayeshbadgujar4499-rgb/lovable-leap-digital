@@ -1,7 +1,7 @@
-import { motion } from "framer-motion";
 import { Check, Star, ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useScrollReveal } from "@/hooks/useGsapScrollTrigger";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useEffect, useRef } from "react";
 
 const plans = [
   {
@@ -30,6 +30,81 @@ const plans = [
   },
 ];
 
+const PlanCard = ({ plan, index }: { plan: typeof plans[0]; index: number }) => {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    el.style.opacity = "0";
+    el.style.transform = "translateY(24px)";
+    el.style.transition = `opacity 0.5s ease-out ${index * 0.1}s, transform 0.5s ease-out ${index * 0.1}s`;
+
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          el.style.opacity = "1";
+          el.style.transform = "translateY(0)";
+          observer.unobserve(el);
+        }
+      },
+      { threshold: 0.15 }
+    );
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [index]);
+
+  return (
+    <div
+      ref={ref}
+      className={`relative rounded-3xl border-2 bg-card/40 backdrop-blur-sm p-8 transition-all duration-300 hover:-translate-y-1 ${
+        plan.popular ? "border-primary md:-mt-4 md:mb-4 shadow-2xl glow-primary" : "border-border/30"
+      }`}
+    >
+      {plan.popular && (
+        <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-5 py-2 rounded-full gradient-accent text-primary-foreground text-xs font-bold shadow-lg">
+          <Star size={12} className="fill-current" />
+          Most Popular
+        </div>
+      )}
+
+      <div className="mb-8">
+        <h3 className="font-heading text-xl font-bold text-foreground">{plan.name}</h3>
+        <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
+      </div>
+
+      <div className="mb-8">
+        <span className="font-heading text-5xl font-bold text-foreground">{plan.price}</span>
+        <span className="text-xs text-muted-foreground ml-1">/ {plan.period}</span>
+      </div>
+
+      <div className="h-px bg-border/30 mb-8" />
+
+      <ul className="space-y-3.5 mb-10">
+        {plan.features.map((feature) => (
+          <li key={feature} className="flex items-start gap-3 text-sm text-muted-foreground">
+            <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.popular ? "gradient-accent" : "bg-primary/10"}`}>
+              <Check size={12} className={plan.popular ? "text-primary-foreground" : "text-primary"} />
+            </div>
+            {feature}
+          </li>
+        ))}
+      </ul>
+
+      <Button
+        asChild
+        className={`w-full font-semibold py-6 rounded-xl group btn-shine ${plan.popular ? "gradient-accent text-primary-foreground border-0 glow-primary" : "bg-muted/30 hover:bg-muted/50 border border-border/30"}`}
+        variant={plan.popular ? "default" : "ghost"}
+      >
+        <a href="#contact">
+          Get Started
+          <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
+        </a>
+      </Button>
+    </div>
+  );
+};
+
 const PricingSection = () => {
   const headingRef = useScrollReveal();
 
@@ -48,57 +123,7 @@ const PricingSection = () => {
 
         <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto items-start">
           {plans.map((plan, i) => (
-            <motion.div
-              key={plan.name}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ duration: 0.5, delay: i * 0.1 }}
-              className={`relative rounded-3xl border-2 bg-card/40 backdrop-blur-sm p-8 transition-all duration-300 hover:-translate-y-1 ${
-                plan.popular ? "border-primary md:-mt-4 md:mb-4 shadow-2xl glow-primary" : "border-border/30"
-              }`}
-            >
-              {plan.popular && (
-                <div className="absolute -top-4 left-1/2 -translate-x-1/2 flex items-center gap-1.5 px-5 py-2 rounded-full gradient-accent text-primary-foreground text-xs font-bold shadow-lg">
-                  <Star size={12} className="fill-current" />
-                  Most Popular
-                </div>
-              )}
-
-              <div className="mb-8">
-                <h3 className="font-heading text-xl font-bold text-foreground">{plan.name}</h3>
-                <p className="text-sm text-muted-foreground mt-1">{plan.description}</p>
-              </div>
-
-              <div className="mb-8">
-                <span className="font-heading text-5xl font-bold text-foreground">{plan.price}</span>
-                <span className="text-xs text-muted-foreground ml-1">/ {plan.period}</span>
-              </div>
-
-              <div className="h-px bg-border/30 mb-8" />
-
-              <ul className="space-y-3.5 mb-10">
-                {plan.features.map((feature) => (
-                  <li key={feature} className="flex items-start gap-3 text-sm text-muted-foreground">
-                    <div className={`w-5 h-5 rounded-full flex items-center justify-center shrink-0 mt-0.5 ${plan.popular ? "gradient-accent" : "bg-primary/10"}`}>
-                      <Check size={12} className={plan.popular ? "text-primary-foreground" : "text-primary"} />
-                    </div>
-                    {feature}
-                  </li>
-                ))}
-              </ul>
-
-              <Button
-                asChild
-                className={`w-full font-semibold py-6 rounded-xl group btn-shine ${plan.popular ? "gradient-accent text-primary-foreground border-0 glow-primary" : "bg-muted/30 hover:bg-muted/50 border border-border/30"}`}
-                variant={plan.popular ? "default" : "ghost"}
-              >
-                <a href="#contact">
-                  Get Started
-                  <ArrowRight size={16} className="ml-2 group-hover:translate-x-1 transition-transform" />
-                </a>
-              </Button>
-            </motion.div>
+            <PlanCard key={plan.name} plan={plan} index={i} />
           ))}
         </div>
       </div>
