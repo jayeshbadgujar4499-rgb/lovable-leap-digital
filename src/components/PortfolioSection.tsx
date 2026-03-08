@@ -55,26 +55,20 @@ const PortfolioSection = () => {
           {filtered.map((project, i) => (
             <motion.div
               key={project.title}
-              layout
-              initial={{ opacity: 0, scale: 0.9 }}
-              whileInView={{ opacity: 1, scale: 1 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ duration: 0.5, delay: i * 0.08 }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="glass-card overflow-hidden group cursor-pointer border-glow"
+              className="glass-card overflow-hidden group cursor-pointer border-glow hover:-translate-y-1 hover:scale-[1.01] transition-transform duration-300"
             >
               <div className={`h-52 bg-gradient-to-br ${project.gradient} relative overflow-hidden`}>
                 <div className="absolute inset-0 flex items-center justify-center">
                   <span className="font-heading text-[120px] font-black text-foreground/[0.06] select-none">{project.title.charAt(0)}</span>
                 </div>
-                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-all duration-500 flex items-center justify-center">
-                  <motion.div
-                    initial={{ scale: 0, opacity: 0 }}
-                    whileHover={{ scale: 1, opacity: 1 }}
-                    className="w-12 h-12 rounded-full bg-foreground/90 flex items-center justify-center"
-                  >
+                <div className="absolute inset-0 bg-background/0 group-hover:bg-background/20 transition-colors duration-500 flex items-center justify-center">
+                  <div className="w-12 h-12 rounded-full bg-foreground/90 flex items-center justify-center opacity-0 group-hover:opacity-100 scale-75 group-hover:scale-100 transition-all duration-300">
                     <ExternalLink size={20} className="text-background" />
-                  </motion.div>
+                  </div>
                 </div>
                 <div className="absolute top-4 left-4 px-3 py-1 rounded-full bg-background/10 backdrop-blur-md text-foreground text-[10px] font-bold uppercase tracking-wider border border-foreground/10">
                   {project.category}

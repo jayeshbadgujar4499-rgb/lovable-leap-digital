@@ -13,12 +13,6 @@ const TestimonialsSection = () => {
 
   return (
     <section id="testimonials" className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
-      <div className="absolute top-0 right-0 w-96 h-96 rounded-full opacity-[0.04] blur-[100px]" style={{ background: "hsl(239 84% 67%)" }} />
-      <div className="absolute inset-0 opacity-[0.015]" style={{
-        backgroundImage: "radial-gradient(circle, hsl(210 40% 98%) 1px, transparent 1px)",
-        backgroundSize: "40px 40px"
-      }} />
-
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-20">
           <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">Testimonials</span>
@@ -31,12 +25,11 @@ const TestimonialsSection = () => {
           {testimonials.map((t, i) => (
             <motion.div
               key={t.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.15, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ y: -6, scale: 1.02 }}
-              className="relative p-8 rounded-3xl border border-border/30 bg-card/40 backdrop-blur-sm group hover:border-primary/20 transition-all duration-300 border-glow"
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className="relative p-8 rounded-3xl border border-border/30 bg-card/40 backdrop-blur-sm group hover:border-primary/20 transition-all duration-300 border-glow hover:-translate-y-1"
             >
               <Quote size={80} className="absolute top-4 right-4 text-primary/[0.04]" />
 

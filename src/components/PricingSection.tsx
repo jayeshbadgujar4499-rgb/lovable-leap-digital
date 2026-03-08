@@ -35,8 +35,6 @@ const PricingSection = () => {
 
   return (
     <section id="pricing" className="section-padding relative overflow-hidden">
-      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[600px] h-[600px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(239 84% 67%)" }} />
-
       <div className="container mx-auto">
         <div ref={headingRef} className="text-center mb-20">
           <span className="inline-block px-4 py-1.5 rounded-full bg-primary/10 text-primary text-xs font-bold uppercase tracking-widest mb-4 border border-primary/20">Pricing</span>
@@ -52,12 +50,11 @@ const PricingSection = () => {
           {plans.map((plan, i) => (
             <motion.div
               key={plan.name}
-              initial={{ opacity: 0, y: 40 }}
+              initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.6, delay: i * 0.12, ease: [0.23, 1, 0.32, 1] }}
-              whileHover={{ y: -8, scale: 1.02 }}
-              className={`relative rounded-3xl border-2 bg-card/40 backdrop-blur-sm p-8 transition-all duration-300 ${
+              transition={{ duration: 0.5, delay: i * 0.1 }}
+              className={`relative rounded-3xl border-2 bg-card/40 backdrop-blur-sm p-8 transition-all duration-300 hover:-translate-y-1 ${
                 plan.popular ? "border-primary md:-mt-4 md:mb-4 shadow-2xl glow-primary" : "border-border/30"
               }`}
             >

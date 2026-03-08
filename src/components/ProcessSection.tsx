@@ -14,12 +14,6 @@ const ProcessSection = () => {
 
   return (
     <section id="process" className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
-      {/* Grid background */}
-      <div className="absolute inset-0 opacity-[0.02]" style={{
-        backgroundImage: "linear-gradient(hsl(210 40% 98%) 1px, transparent 1px), linear-gradient(90deg, hsl(210 40% 98%) 1px, transparent 1px)",
-        backgroundSize: "60px 60px"
-      }} />
-
       <div className="container mx-auto relative">
         <div ref={headingRef} className="text-center mb-20">
           <span className="inline-block px-4 py-1.5 rounded-full bg-secondary/10 text-secondary text-xs font-bold uppercase tracking-widest mb-4 border border-secondary/20">
@@ -34,7 +28,7 @@ const ProcessSection = () => {
         </div>
 
         <div className="max-w-4xl mx-auto relative">
-          {/* Vertical glowing line */}
+          {/* Vertical line */}
           <div className="absolute left-8 md:left-1/2 md:-translate-x-px top-0 bottom-0 w-px" style={{
             background: "linear-gradient(to bottom, hsl(239 84% 67% / 0.5), hsl(187 94% 43% / 0.3), transparent)"
           }} />
@@ -42,17 +36,14 @@ const ProcessSection = () => {
           {steps.map((step, i) => (
             <motion.div
               key={step.step}
-              initial={{ opacity: 0, x: i % 2 === 0 ? -40 : 40 }}
-              whileInView={{ opacity: 1, x: 0 }}
+              initial={{ opacity: 0, y: 30 }}
+              whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
-              transition={{ duration: 0.8, delay: i * 0.15, ease: [0.23, 1, 0.32, 1] }}
+              transition={{ duration: 0.6, delay: i * 0.1 }}
               className={`relative flex items-start gap-8 mb-16 last:mb-0 ${i % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"}`}
             >
               <div className={`flex-1 ${i % 2 === 0 ? "md:text-right md:pr-16" : "md:text-left md:pl-16"}`}>
-                <motion.div
-                  whileHover={{ scale: 1.02 }}
-                  className="p-7 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm inline-block text-left border-glow"
-                >
+                <div className="p-7 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm inline-block text-left border-glow hover:scale-[1.01] transition-transform duration-300">
                   <div className="flex items-center gap-3 mb-3">
                     <div className="w-11 h-11 rounded-xl gradient-accent flex items-center justify-center shadow-lg">
                       <step.icon size={20} className="text-primary-foreground" />
@@ -63,7 +54,7 @@ const ProcessSection = () => {
                     </div>
                   </div>
                   <p className="text-sm leading-relaxed text-muted-foreground">{step.description}</p>
-                </motion.div>
+                </div>
               </div>
 
               {/* Timeline dot */}

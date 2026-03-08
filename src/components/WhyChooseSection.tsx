@@ -16,8 +16,6 @@ const WhyChooseSection = () => {
 
   return (
     <section className="section-padding relative overflow-hidden" style={{ background: "hsl(222 47% 8%)" }}>
-      <div className="absolute -right-32 top-1/2 -translate-y-1/2 w-[500px] h-[500px] rounded-full opacity-[0.04] blur-[120px]" style={{ background: "hsl(187 94% 43%)" }} />
-
       <div className="container mx-auto">
         <div className="grid lg:grid-cols-2 gap-16 items-center max-w-6xl mx-auto">
           <div ref={headingRef}>
@@ -46,12 +44,11 @@ const WhyChooseSection = () => {
             {reasons.map((r, i) => (
               <motion.div
                 key={r.title}
-                initial={{ opacity: 0, y: 30 }}
+                initial={{ opacity: 0, y: 20 }}
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: i * 0.08, ease: [0.23, 1, 0.32, 1] }}
-                whileHover={{ scale: 1.03 }}
-                className="group relative p-6 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm hover:border-primary/20 transition-all duration-300 border-glow"
+                transition={{ duration: 0.4, delay: i * 0.06 }}
+                className="group relative p-6 rounded-2xl border border-border/50 bg-card/40 backdrop-blur-sm hover:border-primary/20 transition-all duration-300 border-glow hover:scale-[1.02]"
               >
                 <span className="absolute top-4 right-4 font-heading text-3xl font-black text-muted/20 group-hover:text-primary/10 transition-colors">{r.number}</span>
                 <div className="w-11 h-11 rounded-xl bg-primary/10 flex items-center justify-center mb-4 group-hover:bg-primary/20 transition-colors">
